@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { FaUserCog } from "react-icons/fa";
+import { HiLockClosed } from "react-icons/hi";
 import { GoSignOut } from "react-icons/go";
 import { FaChevronLeft } from "react-icons/fa";
 
@@ -12,19 +13,31 @@ import IconFlagUK from "../assets/svgs/FlagUK.svg";
 import IconFlagAUS from "../assets/svgs/FlagAUS.svg";
 import IconFlagUSA from "../assets/svgs/FlagUSA.svg";
 import IconGCyan from "../assets/svgs/IconGreyhoundCyan.svg";
-import { useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { MiniLogo } from "./MiniLogo";
+import useSidebar from "@/hook/useSidebar";
 
-export function Sidebar() {
+interface SidebarProps {
+  refSidebar:RefObject<HTMLDivElement>
+
+}
+
+
+export function Sidebar({refSidebar} : SidebarProps) {
   const [isOpenSidebar, setIsOpenSidebar] = useState(true);
+  const {isVisibleSidebar} = useSidebar()
 
-  function isVisibleSidebar() {
+  function isWidthSidebar() {
     return setIsOpenSidebar(!isOpenSidebar);
   }
 
   return (
-    <aside className={`absolute flex h-screen w-64 flex-col bg-zinc-700 pt-4 lg:static ${isOpenSidebar ? "" : "lg:w-16"} ease-in-out duration-500`}>
-      
+    <aside
+      ref={refSidebar}
+      className={`${!isVisibleSidebar ? "hidden lg:flex " : ""}absolute flex h-screen w-64 flex-col bg-zinc-700 pt-4 lg:static ${
+        isOpenSidebar ? "" : "lg:w-16"
+      } duration-500 ease-in-out`}
+    >
       <Link href={"/"}>
         <div className="ml-2 items-center">{isOpenSidebar ? <Logo /> : <MiniLogo />}</div>
       </Link>
@@ -60,7 +73,9 @@ export function Sidebar() {
                 </Link>
               </>
             ) : (
-              <IconFlagUK className="mx-2 h-6 w-6" />
+              <Link href={"/"}>
+                <IconFlagUK className="mx-2 h-6 w-6" />
+              </Link>
             )}
           </Tooltip>
         </div>
@@ -74,6 +89,7 @@ export function Sidebar() {
                   <span className="lg:text-md ml-2 text-sm text-white hover:text-cyan-300 hover:underline lg:font-medium lg:tracking-wider">
                     Australia &amp; New Zealand
                   </span>
+                  <HiLockClosed className="ml-2 mr-2 text-yellow-600" />
                 </div>
               </>
             ) : (
@@ -91,6 +107,7 @@ export function Sidebar() {
                   <span className="lg:text-md ml-2 text-sm text-white hover:text-cyan-300 hover:underline lg:font-medium lg:tracking-wider">
                     North America
                   </span>
+                  <HiLockClosed className="ml-2 mr-2 text-yellow-600" />
                 </div>
               </>
             ) : (
@@ -107,13 +124,13 @@ export function Sidebar() {
           <Link className="flex cursor-pointer items-center" href={"/"}>
             {isOpenSidebar ? (
               <>
-                <FaUserCog className="text-zinc-400 ease-in-out duration-500" fontSize={20} />
-                <span className="lg:text-md ml-2 text-sm  leading-3 text-white hover:text-cyan-300 hover:underline lg:font-medium lg:tracking-wider ease-in-out duration-500">
+                <FaUserCog className="text-zinc-400 duration-500 ease-in-out" fontSize={20} />
+                <span className="lg:text-md ml-2 text-sm  leading-3 text-white duration-500 ease-in-out hover:text-cyan-300 hover:underline lg:font-medium lg:tracking-wider">
                   Pedro Aguiar
                 </span>
               </>
             ) : (
-              <FaUserCog className="text-zinc-400 ease-in-out duration-500" fontSize={28} />
+              <FaUserCog className="text-zinc-400 duration-500 ease-in-out" fontSize={28} />
             )}
           </Link>
         </div>
@@ -122,20 +139,23 @@ export function Sidebar() {
           <Link className="flex cursor-pointer items-center" href={"/"}>
             {isOpenSidebar ? (
               <>
-                <GoSignOut className="rotate-180 text-zinc-400 ease-in-out duration-500" fontSize={20} />
-                <span className="lg:text-md ml-2 text-sm leading-3 text-white hover:text-cyan-300 hover:underline lg:font-medium lg:tracking-wider ease-in-out duration-500">
-              Sign Out
-            </span>
+                <GoSignOut className="rotate-180 text-zinc-400 duration-500 ease-in-out" fontSize={20} />
+                <span className="lg:text-md ml-2 text-sm leading-3 text-white duration-500 ease-in-out hover:text-cyan-300 hover:underline lg:font-medium lg:tracking-wider">
+                  Sign Out
+                </span>
               </>
             ) : (
-              <GoSignOut className="rotate-180 text-zinc-400 ease-in-out duration-500" fontSize={28} />
+              <GoSignOut className="rotate-180 text-zinc-400 duration-500 ease-in-out" fontSize={28} />
             )}
           </Link>
         </div>
       </div>
 
       <div className="hidden lg:flex lg:h-full lg:flex-col lg:items-end lg:justify-end lg:p-4">
-        <FaChevronLeft className={`cursor-pointer text-white ${!isOpenSidebar && "rotate-180"} ease-in-out duration-500`} onClick={isVisibleSidebar} />
+        <FaChevronLeft
+          className={`cursor-pointer text-white ${!isOpenSidebar && "rotate-180"} duration-500 ease-in-out`}
+          onClick={isWidthSidebar}
+        />
       </div>
     </aside>
   );

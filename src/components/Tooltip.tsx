@@ -9,6 +9,8 @@ export function Tooltip({ children, strTooltip }: TooltipProps) {
   const tooltipRef = useRef<HTMLSpanElement>(null);
   const container = useRef<HTMLDivElement>(null);
 
+  
+
   return (
     <div
       ref={container}
@@ -17,6 +19,7 @@ export function Tooltip({ children, strTooltip }: TooltipProps) {
         const { left } = container.current.getBoundingClientRect();
 
         tooltipRef.current.style.left = clientX - left + "px";
+        
       }}
       className="group relative inline-block"
     >
