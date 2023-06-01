@@ -32,7 +32,7 @@ export function Sidebar({refSidebar} : SidebarProps) {
   }
 
   return (
-    <aside
+    <div
       ref={refSidebar}
       className={`${!isVisibleSidebar ? "hidden lg:flex " : ""}absolute flex h-screen w-64 flex-col bg-zinc-700 pt-4 lg:static ${
         isOpenSidebar ? "" : "lg:w-16"
@@ -157,6 +157,6 @@ export function Sidebar({refSidebar} : SidebarProps) {
           onClick={isWidthSidebar}
         />
       </div>
-    </aside>
+    </div>
   );
 }

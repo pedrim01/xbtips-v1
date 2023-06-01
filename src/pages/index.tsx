@@ -6,21 +6,26 @@ import { useEffect, useRef } from "react";
 export default function Dashboard() {
   const { isVisibleSidebar, setIsVisibleSidebar } = useSidebar();
   const handleRefSidebar = useRef<HTMLDivElement>(null);
+  
 
+  
+  
+  const handler = (event: MouseEvent) => {
+    if (event.x>257 && isVisibleSidebar && !handleRefSidebar.current?.contains(event.target as Node | null)) {
+      // console.log(event);
+      // console.log(isVisibleSidebar)
+      setIsVisibleSidebar(!isVisibleSidebar);
+    }
+  };
   useEffect(() => {
-    const handler = (event:any) => {
-      if (!handleRefSidebar.current?.contains(event.target)) {
-        // console.log(event);
-        setIsVisibleSidebar(!isVisibleSidebar);
-      }
-    };
-
-    document.addEventListener("mousedown", handler);
+  
+    document.addEventListener("click", handler);
 
     return () => {
-      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("click", handler);
     };
-  }, []);
+
+  }, [isVisibleSidebar,setIsVisibleSidebar]);
 
   return (
     <div className="flex h-screen w-screen flex-col lg:flex-row">
