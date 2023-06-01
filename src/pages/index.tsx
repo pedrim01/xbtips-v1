@@ -8,9 +8,9 @@ export default function Dashboard() {
   const handleRefSidebar = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handler = (event: MouseEvent) => {
-      if (!handleRefSidebar.current?.contains(event.target as Node | null)) {
-        console.log(event);
+    const handler = (event:any) => {
+      if (!handleRefSidebar.current?.contains(event.target)) {
+        // console.log(event);
         setIsVisibleSidebar(!isVisibleSidebar);
       }
     };
