@@ -9,13 +9,17 @@ export default function Dashboard() {
 
   useEffect(() => {
     const handler = (event: MouseEvent) => {
-      if (!handleRefSidebar.current?.contains(event.target as Node)) {
-        // console.log( event);
+      if (!handleRefSidebar.current?.contains(event.target as Node | null)) {
+        console.log(event);
         setIsVisibleSidebar(!isVisibleSidebar);
       }
     };
 
     document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
   }, []);
 
   return (
