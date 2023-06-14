@@ -1,7 +1,12 @@
 
-export function Logo() {
+type LogoType = {
+  height?: number
+  width?: number
+
+}
+export function Logo({height=12,width=28} : LogoType) {
   return (
-    <svg className="h-12 w-28 lg:w-36" viewBox="0 0 400 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={`h-${height} w-${width} lg:w-${width+8}`} viewBox="0 0 400 72" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M30 32.6628C27.243 32.6628 25 35.4351 25 38.8426V51.8201C25 55.2276 27.243 57.9998 30 57.9998C32.757 57.9998 35 55.2276 35 51.8201V38.8426C35 35.4351 32.757 32.6628 30 32.6628Z"
         fill="#FFB80C"

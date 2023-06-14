@@ -39,7 +39,7 @@ export function Sidebar({refSidebar} : SidebarProps) {
       } duration-500 ease-in-out`}
     >
       <Link href={"/"}>
-        <div className="ml-2 items-center">{isOpenSidebar ? <Logo /> : <MiniLogo />}</div>
+        <div className="ml-8 mt-2">{isOpenSidebar ? <Logo height={8} width={13} /> : <MiniLogo />}</div>
       </Link>
 
       <hr className="mt-12 h-px border-0 bg-zinc-500" />
