@@ -1,6 +1,7 @@
 import { Logo } from "@/components/Logo";
+import Return from "../assets/svgs/Return.svg";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import {IoLogoGoogle} from "react-icons/io";
+import { IoLogoGoogle } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,22 +10,23 @@ import { z } from "zod";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Button from "@/components/Button";
+import useAuthFirebase from "@/hook/useAuthFirebase";
 
 const signInFormSchema = z.object({
   email: z.string().nonempty("O email é obrigatório!").email("Formato de email inválido!"),
-  password: z.string().min(6, "A senha precisa de no mínimo 6 caracteres!"),
+  password: z.string().min(8, "A senha precisa de no mínimo 8 caracteres!"),
 });
 
 type SignFormData = z.infer<typeof signInFormSchema>;
 
 export default function Signin() {
   const [stateTooglePassword, setStateTooglePassword] = useState(true);
-
+  const { signin, loginGoogle } = useAuthFirebase();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    clearErrors,
     setFocus,
   } = useForm<SignFormData>({
     resolver: zodResolver(signInFormSchema),
@@ -34,14 +36,22 @@ export default function Signin() {
     setFocus("email");
   }, [setFocus]);
 
+  
   // console.log(errors);
 
   function handleClickEyePassword() {
     setStateTooglePassword(!stateTooglePassword);
   }
 
-  const handleSignIn: SubmitHandler<SignFormData> = (values) => {
-    console.log(values);
+  const handleSignIn: SubmitHandler<SignFormData> = async (values) => {
+    try {
+      console.log(values);
+      await signin?.(values.email, values.password);
+    } catch (error) {
+      console.log(error);
+      alert("User not register");
+      alert(error);
+    }
   };
 
   return (
@@ -51,11 +61,19 @@ export default function Signin() {
         <h1 className="text-center text-5xl font-extrabold text-zinc-100">
           Faça seu Login <br /> na Plataforma
         </h1>
+        <Link href={"/"} className="mt-4 text-yellow-500 duration-300 ease-in-out hover:text-yellow-800">
+          <Return className="mr-2 inline" />
+          Home
+        </Link>
       </div>
 
-      <div className="flex flex-col items-center justify-center space-y-4 lg:w-6/12 lg:flex-row lg:justify-start">
-        <div className="lg:hidden">
+      <div className="flex flex-col items-center justify-center space-y-4 lg:w-6/12 lg:justify-start">
+        <div className="flex flex-col lg:hidden">
           <Logo height={8} width={20} />
+          <Link href={"/"} className="mt-4 text-yellow-500 duration-300 ease-in-out hover:text-yellow-800">
+            <Return className="mr-2 inline" />
+            Home
+          </Link>
         </div>
 
         <form onSubmit={handleSubmit(handleSignIn)} className="mx-4 flex w-full max-w-sm flex-col rounded-xl p-6">
@@ -92,7 +110,7 @@ export default function Signin() {
             {errors.password && <span className="text-sm text-zinc-300"> {errors.password.message} </span>}
           </div>
 
-          <Link href={"/"} className="mt-2 text-sm text-yellow-700">
+          <Link href={"/"} className="mt-2 text-sm text-yellow-500 duration-300 ease-in-out hover:text-yellow-800">
             Esqueci minha Senha
           </Link>
 
@@ -105,23 +123,26 @@ export default function Signin() {
 
           <span className="mt-8 text-center text-sm text-white">
             Não tem uma conta?{" "}
-            <Link href={"/signup"} className="text-yellow-500">
+            <Link href={"/signup"} className="text-yellow-500 duration-300 ease-in-out hover:text-yellow-800">
               Cadastre-se
             </Link>
           </span>
 
           <hr className="mt-7 w-full border-zinc-800" />
-
-          <div className="mt-8 flex items-center text-start text-base text-white">
-            Ou entre com
-            <Button
-              className="ml-8 flex-1 flex bg-zinc-800 items-center justify-center rounded-md border border-yellow-500 px-3 py-2 font-semibold duration-500 ease-in-out hover:bg-yellow-500 hover:text-white"
-              Icon={<IoLogoGoogle className="text-yellow-700 mr-2" />}
-              href={"/"}
-              value={"GOOGLE"}
-            />
-          </div>
         </form>
+
+        <div className="mt-8 flex items-center text-start text-base text-white">
+          Ou entre com
+          <button
+            className="ml-8 flex flex-1 items-center justify-center rounded-md border border-yellow-500 bg-zinc-800 px-3 py-2 font-semibold duration-500 ease-in-out hover:bg-yellow-500 hover:text-white"
+            onClick={loginGoogle}
+            onMouseDown={() => clearErrors()}
+          >
+            <IoLogoGoogle className="mr-2 text-yellow-700" />
+            GOOGLE
+            
+          </button>
+        </div>
       </div>
     </section>
   );

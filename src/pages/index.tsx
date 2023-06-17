@@ -7,13 +7,19 @@ import { TbUser } from "react-icons/tb";
 import Button from "@/components/Button";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { MiniLogo } from "@/components/MiniLogo";
+import useAuthFirebase from "@/hook/useAuthFirebase";
 
 export default function Home() {
   const [stateDisplay, setStateDisplay] = useState<"flex" | "hidden">("hidden");
+  const [stateMenu, setStateMenu] = useState(false);
+  const {user} = useAuthFirebase()
 
   function handleClickButtonTop() {
     window.scrollTo(0, 0);
     window.location.href = "/";
+  }
+  function handleClickButtonMenu() {
+    setStateMenu(!stateMenu);
   }
 
   function handleScrollY() {
@@ -26,11 +32,11 @@ export default function Home() {
     return () => {
       document.removeEventListener("scroll", handleScrollY);
     };
-  }, [stateDisplay, setStateDisplay]);
+  }, [stateDisplay]);
 
   return (
     <>
-      <nav className="z-1 fixed left-0 right-0 top-0 flex h-20 w-full items-center justify-between bg-zinc-800 shadow-sm shadow-zinc-950 lg:justify-around">
+      <nav className="z-2 fixed left-0 right-0 top-0 flex h-20 w-full items-center justify-between bg-zinc-800 shadow-sm shadow-zinc-950 lg:justify-around">
         <Link className="hidden lg:block" href={"/"}>
           <Logo />
         </Link>
@@ -38,7 +44,7 @@ export default function Home() {
         <div className="ml-2 flex gap-2 lg:hidden">
           <MiniLogo />
           <div className="border-r-1 h-8 border border-zinc-700 py-2 text-white"></div>
-          <button type="button" className="flex items-center gap-2">
+          <button type="button" className="flex items-center gap-2" onClick={handleClickButtonMenu}>
             <HiOutlineMenuAlt2 className="text-3xl text-zinc-400" />
           </button>
         </div>
@@ -75,12 +81,24 @@ export default function Home() {
         </ul>
 
         <ul className="mr-2 flex items-center gap-4 text-sm text-zinc-400 lg:mr-0 lg:gap-8">
-          <Button
+          {/* <Button
+            className="flex items-center gap-1 hover:text-white lg:hidden"
+            Icon={<TbUser className="text-2xl text-yellow-500" />}
+            href={"/signin"}
+          /> */}
+
+          {user ? <Button
             className="flex items-center gap-1 hover:text-white"
             Icon={<TbUser className="text-yellow-500" />}
-            href={"/signin"}
-            value={"Entrar"}
-          />
+            href={"/dashboard"}
+            value={`${user.name}`}
+          /> : <Button
+          className="flex items-center gap-1 hover:text-white"
+          Icon={<TbUser className="text-yellow-500" />}
+          href={"/signin"}
+          value={"Entrar"}
+        /> }
+          
 
           <Button
             className="rounded-md border border-yellow-500 px-3 py-1 duration-500 ease-in-out hover:bg-yellow-500 hover:text-white"
@@ -89,6 +107,41 @@ export default function Home() {
           />
         </ul>
       </nav>
+
+      <ul
+        className={`
+          ${stateMenu ? "fixed flex w-full" : "hidden"} 
+          mt-20 flex-col items-start justify-center gap-4 bg-zinc-800 p-4 text-xl font-semibold text-zinc-400 lg:hidden`}
+      >
+        <li onClick={handleClickButtonMenu}>
+          <a href={"#home"} className="hover:text-white">
+            Home
+          </a>
+        </li>
+
+        <li onClick={handleClickButtonMenu}>
+          <a href={"#about"} className="hover:text-white">
+            Sobre
+          </a>
+        </li>
+
+        <li onClick={handleClickButtonMenu}>
+          <a href={"#plans"} className="hover:text-white">
+            {" "}
+            Planos
+          </a>
+        </li>
+        <li onClick={handleClickButtonMenu}>
+          <a href={"#tools"} className="hover:text-white">
+            Ferramentas
+          </a>
+        </li>
+        <li onClick={handleClickButtonMenu}>
+          <a href={"#contact"} className="hover:text-white">
+            Contato
+          </a>
+        </li>
+      </ul>
 
       <main>
         <section id="home" className="flex min-h-screen items-center justify-center bg-green-400 pt-2">

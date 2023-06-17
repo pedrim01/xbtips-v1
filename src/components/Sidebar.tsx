@@ -13,9 +13,11 @@ import IconFlagUK from "../assets/svgs/FlagUK.svg";
 import IconFlagAUS from "../assets/svgs/FlagAUS.svg";
 import IconFlagUSA from "../assets/svgs/FlagUSA.svg";
 import IconGCyan from "../assets/svgs/IconGreyhoundCyan.svg";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useState } from "react";
 import { MiniLogo } from "./MiniLogo";
 import useSidebar from "@/hook/useSidebar";
+import AvatarUser from "./AvatarUser";
+import useAuthFirebase from "@/hook/useAuthFirebase";
 
 interface SidebarProps {
   refSidebar:RefObject<HTMLDivElement>
@@ -26,6 +28,9 @@ interface SidebarProps {
 export function Sidebar({refSidebar} : SidebarProps) {
   const [isOpenSidebar, setIsOpenSidebar] = useState(true);
   const {isVisibleSidebar} = useSidebar()
+  const {user}  = useAuthFirebase()
+
+  const {signOut} = useAuthFirebase()
 
   function isWidthSidebar() {
     return setIsOpenSidebar(!isOpenSidebar);
@@ -38,8 +43,8 @@ export function Sidebar({refSidebar} : SidebarProps) {
         isOpenSidebar ? "" : "lg:w-16"
       } duration-500 ease-in-out`}
     >
-      <Link href={"/"}>
-        <div className="ml-8 mt-2">{isOpenSidebar ? <Logo height={8} width={13} /> : <MiniLogo />}</div>
+      <Link href={"/dashboard"}>
+        {isOpenSidebar ? <div className="ml-8 mt-2"><Logo height={8} width={13} /></div> : <div className="ml-2 mt-2"><MiniLogo /></div>}
       </Link>
 
       <hr className="mt-12 h-px border-0 bg-zinc-500" />
@@ -121,22 +126,23 @@ export function Sidebar({refSidebar} : SidebarProps) {
 
       <div className="ml-4 space-y-4">
         <div className="mt-8">
-          <Link className="flex cursor-pointer items-center" href={"/"}>
+          <div className="flex items-center">
             {isOpenSidebar ? (
               <>
-                <FaUserCog className="text-zinc-400 duration-500 ease-in-out" fontSize={20} />
+                <AvatarUser className="text-zinc-400 duration-500 ease-in-out"/>
                 <span className="lg:text-md ml-2 text-sm  leading-3 text-white duration-500 ease-in-out hover:text-cyan-300 hover:underline lg:font-medium lg:tracking-wider">
-                  Pedro Aguiar
+                  {user?.name}
                 </span>
               </>
             ) : (
-              <FaUserCog className="text-zinc-400 duration-500 ease-in-out" fontSize={28} />
+              
+              <AvatarUser className="text-zinc-400 duration-500 ease-in-out" />
             )}
-          </Link>
+          </div>
         </div>
 
         <div className="mt-8">
-          <Link className="flex cursor-pointer items-center" href={"/"}>
+          <Link className="flex cursor-pointer items-center" href={"/"} onClick={signOut}>
             {isOpenSidebar ? (
               <>
                 <GoSignOut className="rotate-180 text-zinc-400 duration-500 ease-in-out" fontSize={20} />
@@ -145,7 +151,7 @@ export function Sidebar({refSidebar} : SidebarProps) {
                 </span>
               </>
             ) : (
-              <GoSignOut className="rotate-180 text-zinc-400 duration-500 ease-in-out" fontSize={28} />
+              <GoSignOut className="rotate-180 text-zinc-400 duration-500 ease-in-out" fontSize={20} />
             )}
           </Link>
         </div>
