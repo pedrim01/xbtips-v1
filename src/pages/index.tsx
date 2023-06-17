@@ -95,14 +95,14 @@ export default function Home() {
           /> : <Button
           className="flex items-center gap-1 hover:text-white"
           Icon={<TbUser className="text-yellow-500" />}
-          href={"/signin"}
+          href={!user ? "/signin" : "/dashboard"}
           value={"Entrar"}
         /> }
           
 
           <Button
             className="rounded-md border border-yellow-500 px-3 py-1 duration-500 ease-in-out hover:bg-yellow-500 hover:text-white"
-            href={"/signup"}
+            href={!user ? "/signup" : "/dashboard"}
             value={"Criar Conta"}
           />
         </ul>

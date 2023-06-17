@@ -110,7 +110,7 @@ export default function Signin() {
             {errors.password && <span className="text-sm text-zinc-300"> {errors.password.message} </span>}
           </div>
 
-          <Link href={"/"} className="mt-2 text-sm text-yellow-500 duration-300 ease-in-out hover:text-yellow-800">
+          <Link href={"/forgotPassword"} className="mt-2 text-sm text-yellow-500 duration-300 ease-in-out hover:text-yellow-800">
             Esqueci minha Senha
           </Link>
 

@@ -9,6 +9,7 @@ interface AuthFirebaseContextProps {
   loading?: boolean;
   signin?: (email: string, password: string) => Promise<void>;
   signup?: (email: string, password: string) => Promise<void>;
+  recoverPassword?: (email: string) => Promise<void>;
 
   loginGoogle?: () => Promise<void>;
   signOut?: () => Promise<void>;
@@ -58,36 +59,43 @@ export function AuthFirebaseProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function signin(email:string, password:string) {
+  async function signin(email: string, password: string) {
     try {
-      const resp = await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password);
+      const resp = await firebase.auth().signInWithEmailAndPassword(email, password);
 
       await configSession(resp.user);
-      router.push('/dashboard');
+      router.push("/dashboard");
     } finally {
       setLoading(false);
     }
   }
 
-  async function signup(email:string, password:string) {
+  async function signup(email: string, password: string) {
     try {
       setLoading(true);
-      const resp = await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password);
+      const resp = await firebase.auth().createUserWithEmailAndPassword(email, password);
 
       await configSession(resp.user);
-      router.push('/');
+      router.push("/signin");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function recoverPassword(email: string) {
+    try {
+      setLoading(true);
+      const resp = await firebase.auth().sendPasswordResetEmail(email);
+      alert("Verifique sua Caixa de Entrada ou seu Lixo Eletrônico para encontrar o e-mail de recuperação da senha!");
+
+      // await configSession(resp.user);
+      router.push("/signin");
     } finally {
       setLoading(false);
     }
   }
 
   async function loginGoogle() {
-    
-
     try {
       const resp = await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
 
@@ -109,7 +117,7 @@ export function AuthFirebaseProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    if (Cookies.get('admin-template-xbtips-auth')) {
+    if (Cookies.get("admin-template-xbtips-auth")) {
       const cancel = firebase.auth().onIdTokenChanged(configSession);
 
       return () => cancel();
@@ -125,8 +133,9 @@ export function AuthFirebaseProvider({ children }: { children: ReactNode }) {
         loading,
         signin,
         signup,
+        recoverPassword,
         loginGoogle,
-        signOut
+        signOut,
       }}
     >
       {children}
