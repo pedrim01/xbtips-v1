@@ -18,7 +18,7 @@ export default function ForceAuthentication({ children }: { children: ReactNode 
               __html: `
               if (!document.cookie?.includes("admin-template-xbtips-auth"))
               {
-                window.location.href = "/signin"  
+                window.location.href = "/login"  
             }`,
             }}
           />
@@ -45,7 +45,7 @@ export default function ForceAuthentication({ children }: { children: ReactNode 
   } else if (loading) {
     return renderLoading();
   } else {
-    router.push("/signin");
+    router.push("/login");
 
     return null;
   }

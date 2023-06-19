@@ -2,7 +2,7 @@ import { MdEmail } from "react-icons/md";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
+import swal from 'sweetalert';
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import useAuthFirebase from "@/hook/useAuthFirebase";
@@ -19,8 +19,9 @@ export default function ForgotPassword() {
     register,
     handleSubmit,
     formState: { errors },
-
+    setError,
     setFocus,
+    
   } = useForm<SignFormData>({
     resolver: zodResolver(forgotPasswordSchema),
   });
@@ -28,13 +29,15 @@ export default function ForgotPassword() {
   useEffect(() => {
     setFocus("email");
   }, [setFocus]);
-
+  const [msg,setMsg] = useState('')
   const handleRecover: SubmitHandler<SignFormData> = async (values) => {
     try {
       await recoverPassword?.(values.email);
+      swal("Verifique sua Caixa de Entrada ou seu Lixo Eletrônico para encontrar o e-mail de recuperação da senha!")
     } catch (error) {
-      console.log(error);
-      alert("Email não enviado");
+      setError("root", {
+        message: "Email não cadastrado!",
+      });
     }
   };
 
@@ -64,9 +67,13 @@ export default function ForgotPassword() {
             Recuperar
           </button>
 
+         
+
+          {errors.root && <span className="mt-2 text-center text-sm font-semibold text-red-500"> {errors.root?.message} </span>}
+
           <hr className="mt-7 w-full border-zinc-800" />
         </form>
-        <Link href={"/signin"} className=" text-sm text-zinc-500 duration-300 ease-in-out hover:text-zinc-800">
+        <Link href={"/login"} className=" text-sm text-zinc-500 duration-300 ease-in-out hover:text-zinc-800">
           Voltar
         </Link>
       </div>

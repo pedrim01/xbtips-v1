@@ -1,5 +1,5 @@
 import firebase from "../firebase/config";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, MutableRefObject, ReactNode, useEffect, useRef, useState } from "react";
 import User from "../model/User";
 import Cookies from "js-cookie";
 import router from "next/router";
@@ -8,8 +8,9 @@ interface AuthFirebaseContextProps {
   user?: User | null;
   loading?: boolean;
   signin?: (email: string, password: string) => Promise<void>;
-  signup?: (email: string, password: string) => Promise<void>;
+  signup?: (email: string, password: string, name: string) => Promise<void>;
   recoverPassword?: (email: string) => Promise<void>;
+  confirmPassword?: (oobCode: MutableRefObject<string | null>,password: string) => Promise<void>;
 
   loginGoogle?: () => Promise<void>;
   signOut?: () => Promise<void>;
@@ -70,13 +71,16 @@ export function AuthFirebaseProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function signup(email: string, password: string) {
+  async function signup(email: string, password: string, name: string) {
     try {
       setLoading(true);
       const resp = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      await resp.user?.updateProfile({
+        displayName: name,
+      });
 
       await configSession(resp.user);
-      router.push("/signin");
+      router.push("/login");
     } finally {
       setLoading(false);
     }
@@ -85,11 +89,20 @@ export function AuthFirebaseProvider({ children }: { children: ReactNode }) {
   async function recoverPassword(email: string) {
     try {
       setLoading(true);
-      const resp = await firebase.auth().sendPasswordResetEmail(email);
-      alert("Verifique sua Caixa de Entrada ou seu Lixo Eletrônico para encontrar o e-mail de recuperação da senha!");
+      await firebase.auth().sendPasswordResetEmail(email);
+      
 
-      // await configSession(resp.user);
-      router.push("/signin");
+      router.push("/login");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function confirmPassword(oobCode: MutableRefObject<string | null>,password: string) {
+    try {
+      setLoading(true);
+      await firebase.auth().confirmPasswordReset(oobCode.current!, password);
+      router.push("/login");
     } finally {
       setLoading(false);
     }
@@ -134,6 +147,7 @@ export function AuthFirebaseProvider({ children }: { children: ReactNode }) {
         signin,
         signup,
         recoverPassword,
+        confirmPassword,
         loginGoogle,
         signOut,
       }}

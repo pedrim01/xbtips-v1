@@ -19,7 +19,7 @@ const signInFormSchema = z.object({
 
 type SignFormData = z.infer<typeof signInFormSchema>;
 
-export default function Signin() {
+export default function Login() {
   const [stateTooglePassword, setStateTooglePassword] = useState(true);
   const { signin, loginGoogle } = useAuthFirebase();
   const {
@@ -28,6 +28,7 @@ export default function Signin() {
     formState: { errors },
     clearErrors,
     setFocus,
+    setError,
   } = useForm<SignFormData>({
     resolver: zodResolver(signInFormSchema),
   });
@@ -36,7 +37,6 @@ export default function Signin() {
     setFocus("email");
   }, [setFocus]);
 
-  
   // console.log(errors);
 
   function handleClickEyePassword() {
@@ -45,12 +45,12 @@ export default function Signin() {
 
   const handleSignIn: SubmitHandler<SignFormData> = async (values) => {
     try {
-      console.log(values);
+      // console.log(values);
       await signin?.(values.email, values.password);
     } catch (error) {
-      console.log(error);
-      alert("User not register");
-      alert(error);
+      setError("root", {
+        message: "E-mail e/ou senha inválido(s).",
+      });
     }
   };
 
@@ -84,6 +84,7 @@ export default function Signin() {
               <input
                 type="email"
                 placeholder="E-mail"
+                tabIndex={1}
                 className="flex-1 rounded-md bg-zinc-800 py-3 pl-10 text-sm text-zinc-300  placeholder:text-zinc-600 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500"
                 {...register("email")}
               />
@@ -98,6 +99,7 @@ export default function Signin() {
               <input
                 type={`${stateTooglePassword ? "password" : "text"}`}
                 placeholder="Senha"
+                tabIndex={2}
                 autoComplete="off"
                 className="flex-1 rounded-md bg-zinc-800 py-3 pl-10 text-sm text-zinc-300  placeholder:text-zinc-600 focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500"
                 {...register("password")}
@@ -110,20 +112,25 @@ export default function Signin() {
             {errors.password && <span className="text-sm text-zinc-300"> {errors.password.message} </span>}
           </div>
 
-          <Link href={"/forgotPassword"} className="mt-2 text-sm text-yellow-500 duration-300 ease-in-out hover:text-yellow-800">
+          <Link
+            href={"/forgotPassword"}
+            tabIndex={6}
+            className="mt-2 text-sm text-yellow-500 duration-300 ease-in-out hover:text-yellow-800"
+          >
             Esqueci minha Senha
           </Link>
 
-          <button
+          <input
             type="submit"
-            className="mt-6 rounded-md bg-yellow-500 py-2 text-lg text-zinc-800 opacity-50 hover:bg-yellow-600 hover:font-semibold hover:text-zinc-950 hover:opacity-100"
-          >
-            Entrar
-          </button>
+            value={"Entrar"}
+            tabIndex={3}
+            className="mt-6 cursor-pointer rounded-md bg-yellow-500 py-2 text-lg text-zinc-800 opacity-50 hover:bg-yellow-600 hover:font-semibold hover:text-zinc-950 hover:opacity-100"
+          />
+          {errors.root && <span className="mt-2 text-center text-sm font-semibold text-red-500"> {errors.root?.message} </span>}
 
           <span className="mt-8 text-center text-sm text-white">
             Não tem uma conta?{" "}
-            <Link href={"/signup"} className="text-yellow-500 duration-300 ease-in-out hover:text-yellow-800">
+            <Link href={"/register"} className="text-yellow-500 duration-300 ease-in-out hover:text-yellow-800" tabIndex={4}>
               Cadastre-se
             </Link>
           </span>
@@ -136,11 +143,11 @@ export default function Signin() {
           <button
             className="ml-8 flex flex-1 items-center justify-center rounded-md border border-yellow-500 bg-zinc-800 px-3 py-2 font-semibold duration-500 ease-in-out hover:bg-yellow-500 hover:text-white"
             onClick={loginGoogle}
+            tabIndex={5}
             onMouseDown={() => clearErrors()}
           >
             <IoLogoGoogle className="mr-2 text-yellow-700" />
             GOOGLE
-            
           </button>
         </div>
       </div>
