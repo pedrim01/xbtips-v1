@@ -1,7 +1,10 @@
-import { Link as LinkScrool } from "react-scroll";
+import { MdLogin } from "react-icons/md";
+import Balance from "react-wrap-balancer";
 
+import { Link as LinkScrool } from "react-scroll";
+import Image from "next/image";
 import Link from "next/link";
-import {BsChevronRight} from 'react-icons/bs'
+import { BsChevronRight } from "react-icons/bs";
 import { TiChevronRightOutline } from "react-icons/ti";
 
 import { useEffect, useState } from "react";
@@ -12,6 +15,8 @@ import Button from "@/components/Button";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { MiniLogo } from "@/components/MiniLogo";
 import useAuthFirebase from "@/hook/useAuthFirebase";
+import { HeroPattern } from "@/components/HeroPattern";
+import { Underline, UnderlineTipo2 } from "@/components/Underline";
 
 export default function Home() {
   const [stateDisplay, setStateDisplay] = useState<"flex" | "hidden">("hidden");
@@ -42,7 +47,7 @@ export default function Home() {
 
   return (
     <>
-      <nav className="z-2 fixed left-0 right-0 top-0 flex h-20 w-full items-center justify-between bg-zinc-800 shadow-sm shadow-zinc-950 lg:justify-around">
+      <nav className="fixed left-0 right-0 top-0 z-20 flex h-20 w-full items-center justify-between bg-zinc-900 shadow-sm shadow-zinc-950 lg:justify-around">
         <Link className="hidden lg:block" href={"/"}>
           <Logo />
         </Link>
@@ -125,68 +130,112 @@ export default function Home() {
         <LinkScrool
           to={"home"}
           onClick={handleClickButtonMenu}
-          className="py-2 px-4 flex items-center w-1/2 justify-around rounded-md cursor-pointer duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
+          className="flex w-1/2 cursor-pointer items-center justify-around rounded-md px-4 py-2 duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
         >
-          <span className="flex-1"> Home</span> 
-          <BsChevronRight className="text-sm tracking-tighter"/>
+          <span className="flex-1"> Home</span>
+          <BsChevronRight className="text-sm tracking-tighter" />
         </LinkScrool>
-
 
         <LinkScrool
           to={"about"}
           onClick={handleClickButtonMenu}
-          className="py-2 px-4 flex items-center w-1/2 justify-around rounded-md cursor-pointer duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
+          className="flex w-1/2 cursor-pointer items-center justify-around rounded-md px-4 py-2 duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
         >
-          <span className="flex-1"> Sobre</span> 
-          
-          <BsChevronRight className="text-sm tracking-tighter"/>
+          <span className="flex-1"> Sobre</span>
+
+          <BsChevronRight className="text-sm tracking-tighter" />
         </LinkScrool>
 
         <LinkScrool
           onClick={handleClickButtonMenu}
-          className="py-2 px-4 flex items-center w-1/2 justify-around rounded-md cursor-pointer duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
+          className="flex w-1/2 cursor-pointer items-center justify-around rounded-md px-4 py-2 duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
           to={"plans"}
         >
-          <span className="flex-1"> Plans</span> 
-          
-          <BsChevronRight className="text-sm tracking-tighter"/>
+          <span className="flex-1"> Plans</span>
+
+          <BsChevronRight className="text-sm tracking-tighter" />
         </LinkScrool>
 
         <LinkScrool
           onClick={handleClickButtonMenu}
-          className="py-2 px-4 flex items-center w-1/2 justify-around rounded-md cursor-pointer duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
+          className="flex w-1/2 cursor-pointer items-center justify-around rounded-md px-4 py-2 duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
           to={"tools"}
         >
-          <span className="flex-1"> Ferramentas</span> 
-          
-          <BsChevronRight className="text-sm tracking-tighter"/>
+          <span className="flex-1"> Ferramentas</span>
+
+          <BsChevronRight className="text-sm tracking-tighter" />
         </LinkScrool>
 
         <LinkScrool
           onClick={handleClickButtonMenu}
-          className="py-2 px-4 flex items-center w-1/2 justify-around rounded-md cursor-pointer duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
+          className="flex w-1/2 cursor-pointer items-center justify-around rounded-md px-4 py-2 duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
           to={"contact"}
         >
-          <span className="flex-1"> Contato</span> 
-          
-          <BsChevronRight className="text-sm tracking-tighter"/>
+          <span className="flex-1"> Contato</span>
+
+          <BsChevronRight className="text-sm tracking-tighter" />
         </LinkScrool>
       </ul>
 
-      <main>
-        <section id="home" className="flex min-h-screen items-center justify-center bg-green-400 pt-2">
+      <main className="min-w-[400px]">
+        <section
+          id="home"
+          
+          style={{
+            backgroundImage: `url('/images/capa2.jpg')`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",  
+            backgroundPosition: "center center",
+          }}
+          
+          className="flex min-h-screen items-center justify-center bg-zinc-800 pt-20"
+        >
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="mt-8 max-w-[720x] text-center text-5xl font-extrabold leading-tight tracking-tight text-zinc-300">
+              <Balance>
+                Potencialize suas{" "}
+                <span className="relative">
+                  apostas e
+                  <Underline className="absolute left-[0%]" />
+                </span>
+                alcance resultados extraordinários
+              </Balance>
+            </h1>
+
+            <HeroPattern className="absolute bottom-1/2 left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2" />
+
+            <p className="mt-8 max-w-2xl text-center text-2xl font-normal leading-7 tracking-tight text-zinc-500">
+              <Balance>Nossa Plataforma busca explorar diversos mercados esportivos. Ouvimos suas sugestões para aprimorar nossas estratégias.</Balance>
+            </p>
+
+            <p className="mt-4 max-w-[720x] text-center text-2xl font-bold leading-7 tracking-tight text-zinc-400">
+              <Balance>
+                JUNTE-SE AO NOSSO TIME DE{" "}
+                <span className="relative">
+                  VENCEDORES!!!
+                  <UnderlineTipo2 className="absolute left-[0%]" />
+                </span>
+              </Balance>
+            </p>
+
+            <Button
+              className="z-1 relative my-20 flex items-center rounded-md border-2 border-cyan-300 bg-zinc-400 px-6 py-3 font-bold text-zinc-950 duration-300 ease-in-out hover:border-yellow-300 hover:text-zinc-950 hover:opacity-70"
+              href={!user ? "/login" : "/dashboard"}
+              value={"BORA PRA CIMA!"}
+            >
+              <MdLogin className="ml-4 text-2xl" />
+            </Button>
+          </div>
+
+        </section>
+
+        <section id="about" className="flex min-h-screen items-center justify-center bg-red-400 pt-20">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam
           accusamus. Mollitia omnis illo eligendi veniam itaque facilis neque tempore natus molestiae. Voluptatibus. Lorem ipsum dolor sit
           amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis
         </section>
 
-        <section id="about" className="flex min-h-screen items-center justify-center bg-red-400 pt-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam
-          accusamus. Mollitia omnis illo eligendi veniam itaque facilis neque tempore natus molestiae. Voluptatibus. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis
-        </section>
-
-        <section id="plans" className="flex min-h-screen items-center justify-center bg-blue-400 pt-2">
+        <section id="plans" className="flex min-h-screen items-center justify-center bg-blue-400 pt-20">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam
           accusamus. Mollitia omnis illo eligendi veniam itaque facilis neque tempore natus molestiae. Voluptatibus. Lorem ipsum dolor sit
           amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis
@@ -196,11 +245,11 @@ export default function Home() {
           Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis illo eligendi veniam itaque facilis
         </section>
 
-        <section id="tools" className="flex min-h-screen items-center justify-center bg-gray-400 pt-2">
+        <section id="tools" className="flex min-h-screen items-center justify-center bg-gray-400 pt-20">
           Ferramentas
         </section>
 
-        <footer id="contact" className="flex min-h-screen items-center justify-center bg-cyan-400 pt-2">
+        <footer id="contact" className="flex min-h-screen items-center justify-center bg-cyan-400 pt-20">
           Contato
         </footer>
       </main>
