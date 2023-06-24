@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { MdLogin } from "react-icons/md";
 import Balance from "react-wrap-balancer";
 
@@ -67,16 +68,18 @@ export default function Home() {
             </a>
           </li>
 
-          <li>
-            <a href={"#about"} className="hover:text-white">
-              Sobre
-            </a>
+          <li className="relative">
+            <a className="cursor-default opacity-30 hover:text-white">Planos</a>
+
+            <div className="free-div absolute bottom-4 left-8 p-1 text-xs  font-bold text-green-500">
+              <span className="animate-pulse">FREE</span>
+            </div>
           </li>
 
           <li>
-            <a href={"#plans"} className="hover:text-white">
+            <a href={"#about"} className="hover:text-white">
               {" "}
-              Planos
+              Sobre Nós
             </a>
           </li>
           <li>
@@ -123,9 +126,11 @@ export default function Home() {
       </nav>
 
       <ul
-        className={`
-          ${stateMenu ? "fixed flex w-full" : "hidden"} 
-          mt-20 flex-col items-start justify-center gap-4 bg-zinc-800 p-4 text-xl font-semibold text-zinc-400 lg:hidden`}
+        className={`transition-transform duration-300 ease-in-out
+          ${stateMenu ? "translate-y-0" : "invisible -translate-y-full"} 
+          fixed z-20 mt-20 flex w-full flex-col items-start justify-center gap-4 bg-zinc-900 p-4 text-xl font-semibold text-zinc-200 opacity-90 lg:hidden
+          
+          `}
       >
         <LinkScrool
           to={"home"}
@@ -136,22 +141,21 @@ export default function Home() {
           <BsChevronRight className="text-sm tracking-tighter" />
         </LinkScrool>
 
-        <LinkScrool
-          to={"about"}
-          onClick={handleClickButtonMenu}
-          className="flex w-1/2 cursor-pointer items-center justify-around rounded-md px-4 py-2 duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
-        >
-          <span className="flex-1"> Sobre</span>
+        <LinkScrool to={""} className="relative flex w-1/2 cursor-default items-center justify-around rounded-md px-4 py-2">
+          <span className="flex-1 opacity-30">Planos</span>
+          <div className="free-div absolute bottom-4 left-24 p-1 text-sm  font-black text-lime-600">
+            <span className="animate-pulse">FREE</span>
+          </div>
 
-          <BsChevronRight className="text-sm tracking-tighter" />
+          {/* <BsChevronRight className="text-sm tracking-tighter" /> */}
         </LinkScrool>
 
         <LinkScrool
           onClick={handleClickButtonMenu}
           className="flex w-1/2 cursor-pointer items-center justify-around rounded-md px-4 py-2 duration-300 ease-in-out hover:bg-zinc-900 hover:text-white"
-          to={"plans"}
+          to={"about"}
         >
-          <span className="flex-1"> Plans</span>
+          <span className="flex-1">Sobre Nós</span>
 
           <BsChevronRight className="text-sm tracking-tighter" />
         </LinkScrool>
@@ -180,62 +184,73 @@ export default function Home() {
       <main className="min-w-[400px]">
         <section
           id="home"
-          
           style={{
-            backgroundImage: `url('/images/capa2.jpg')`,
+            backgroundImage: `url('/images/capaDefault.svg')`,
             backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",  
+            backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
           }}
-          
           className="flex min-h-screen items-center justify-center bg-zinc-800 pt-20"
         >
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="mt-8 max-w-[720x] text-center text-5xl font-extrabold leading-tight tracking-tight text-zinc-300">
+          <div className="flex flex-col items-center">
+            <h1 className="mt-8 max-w-[720x] text-center text-5xl font-extrabold leading-tight tracking-tight text-zinc-300 max-lg:text-4xl">
               <Balance>
                 Potencialize suas{" "}
                 <span className="relative">
-                  apostas e
-                  <Underline className="absolute left-[0%]" />
+                  apostas <Underline className="absolute left-[0%] w-full" />
                 </span>
-                alcance resultados extraordinários
+                e alcance resultados extraordinários
               </Balance>
             </h1>
 
             <HeroPattern className="absolute bottom-1/2 left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2" />
 
-            <p className="mt-8 max-w-2xl text-center text-2xl font-normal leading-7 tracking-tight text-zinc-500">
-              <Balance>Nossa Plataforma busca explorar diversos mercados esportivos. Ouvimos suas sugestões para aprimorar nossas estratégias.</Balance>
+            <p className="mt-8 max-w-2xl text-center text-2xl font-normal leading-7 tracking-tight text-zinc-500 max-lg:text-xl">
+              <Balance>
+                Nossa Plataforma busca explorar diversos mercados esportivos. Ouvimos suas sugestões para aprimorar nossas estratégias.
+              </Balance>
             </p>
 
-            <p className="mt-4 max-w-[720x] text-center text-2xl font-bold leading-7 tracking-tight text-zinc-400">
+            <p className="mt-4 max-w-[720x] text-center text-2xl font-bold leading-7 tracking-tight text-zinc-400 max-lg:text-xl">
               <Balance>
                 JUNTE-SE AO NOSSO TIME DE{" "}
                 <span className="relative">
                   VENCEDORES!!!
-                  <UnderlineTipo2 className="absolute left-[0%]" />
+                  <UnderlineTipo2 className="absolute left-[0%]  w-full" />
                 </span>
               </Balance>
             </p>
 
             <Button
-              className="z-1 relative my-20 flex items-center rounded-md border-2 border-cyan-300 bg-zinc-400 px-6 py-3 font-bold text-zinc-950 duration-300 ease-in-out hover:border-yellow-300 hover:text-zinc-950 hover:opacity-70"
+              className="z-1 relative mt-10 flex items-center rounded-md border-2 border-cyan-300 bg-zinc-400 px-6 py-3 font-bold text-zinc-950 duration-300 ease-in-out hover:border-yellow-300 hover:text-zinc-950 hover:opacity-70 max-lg:px-3 max-lg:py-3"
               href={!user ? "/login" : "/dashboard"}
               value={"BORA PRA CIMA!"}
             >
               <MdLogin className="ml-4 text-2xl" />
             </Button>
-          </div>
 
+            <motion.h2
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.8 }}
+              className="my-20 mt-4 max-w-[720px] text-center text-xl font-extrabold leading-tight tracking-tight text-zinc-300 max-lg:text-lg"
+            >
+              <Balance>
+                Acesso <span className="animate-pulse font-bold text-green-500">TOTAL</span> à Plataforma:{" "}
+                <span className="animate-pulse font-bold text-green-500">GRATUITO!!!</span>
+              </Balance>
+              <div className="mt-2"> (Oferta de Lançamento)</div>
+            </motion.h2>
+          </div>
         </section>
 
-        <section id="about" className="flex min-h-screen items-center justify-center bg-red-400 pt-20">
+        {/* <section id="plans" className="flex min-h-screen items-center justify-center bg-zinc-900 pt-20">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam
           accusamus. Mollitia omnis illo eligendi veniam itaque facilis neque tempore natus molestiae. Voluptatibus. Lorem ipsum dolor sit
           amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis
-        </section>
+        </section> */}
 
-        <section id="plans" className="flex min-h-screen items-center justify-center bg-blue-400 pt-20">
+        <section id="about" className="flex min-h-screen items-center justify-center bg-blue-400 pt-20">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam
           accusamus. Mollitia omnis illo eligendi veniam itaque facilis neque tempore natus molestiae. Voluptatibus. Lorem ipsum dolor sit
           amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis
