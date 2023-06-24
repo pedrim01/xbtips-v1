@@ -239,7 +239,7 @@ export default function Home() {
                 Acesso <span className="animate-pulse font-bold text-green-500">TOTAL</span> à Plataforma:{" "}
                 <span className="animate-pulse font-bold text-green-500">GRATUITO!!!</span>
               </Balance>
-              <div className="mt-2"> (Oferta de Lançamento)</div>
+              <div className="mt-2 max-lg:mt-0"> (Oferta de Lançamento)</div>
             </motion.h2>
           </div>
         </section>
