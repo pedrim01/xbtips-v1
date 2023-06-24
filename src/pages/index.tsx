@@ -197,7 +197,7 @@ export default function Home() {
               <Balance>
                 Potencialize suas{" "}
                 <span className="relative">
-                  apostas <Underline className="absolute left-[0%] w-full" />
+                  apostas <Underline className="bottom-[-8%] absolute left-[0%] w-full" />
                 </span>
                 e alcance resultados extraordinários
               </Balance>
@@ -216,7 +216,7 @@ export default function Home() {
                 JUNTE-SE AO NOSSO TIME DE{" "}
                 <span className="relative">
                   VENCEDORES!!!
-                  <UnderlineTipo2 className="absolute left-[0%]  w-full" />
+                  <UnderlineTipo2 className="bottom-[-15%] absolute left-[0%]  w-full" />
                 </span>
               </Balance>
             </p>
@@ -239,7 +239,6 @@ export default function Home() {
                 Acesso <span className="animate-pulse font-bold text-green-500">TOTAL</span> à Plataforma:{" "}
                 <span className="animate-pulse font-bold text-green-500">GRATUITO!!!</span>
               </Balance>
-              <div className="mt-2 max-lg:mt-0"> (Oferta de Lançamento)</div>
             </motion.h2>
           </div>
         </section>
