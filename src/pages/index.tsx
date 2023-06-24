@@ -233,12 +233,13 @@ export default function Home() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.8 }}
-              className="my-20 mt-4 max-w-[720px] text-center text-xl font-extrabold leading-tight tracking-tight text-zinc-300 max-lg:text-lg"
+              className="my-20 max-lg:mb-28 max-lg:my-10 mt-4 max-w-[720px] text-center text-xl font-extrabold leading-tight tracking-tight text-zinc-300 max-lg:text-lg"
             >
               <Balance>
                 Acesso <span className="animate-pulse font-bold text-green-500">TOTAL</span> à Plataforma:{" "}
                 <span className="animate-pulse font-bold text-green-500">GRATUITO!!!</span>
               </Balance>
+                <div className="mt-2 max-lg:mt-0" >Oferta de Lançamento</div>
             </motion.h2>
           </div>
         </section>
