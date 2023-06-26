@@ -256,7 +256,7 @@ export default function Home() {
 
         <section
           id="about"
-          className="flex min-h-screen flex-wrap items-start justify-center bg-zinc-900 pb-20 pt-20 max-lg:flex-col max-lg:items-center"
+          className="flex min-h-auto flex-wrap items-start justify-center bg-zinc-900 pb-20 pt-20 max-lg:flex-col max-lg:items-center"
         >
           <div className="flex w-1/3 flex-col items-center justify-center gap-4 p-2 pt-8 max-lg:w-full">
             <div className="space-y-2">
@@ -296,7 +296,7 @@ export default function Home() {
               </Balance>
             </p>
 
-            <p className="lg:text-3xl">
+            <p className="lg:text-3 xl">
               <Balance>Junte-se a nós em nossa jornada, pois não há limites para o que podemos alcançar.</Balance>
             </p>
           </div>
