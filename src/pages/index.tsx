@@ -256,9 +256,9 @@ export default function Home() {
 
         <section
           id="about"
-          className="min-h-auto flex flex-wrap items-start justify-center bg-zinc-900 pb-20 pt-20 max-lg:flex-col max-lg:items-center"
+          className="flex min-h-screen flex-wrap items-start justify-center bg-zinc-900 pb-20 pt-20 max-lg:flex-col max-lg:items-center"
         >
-          <div className="max-lg:w-full flex w-1/3 flex-col items-center justify-center gap-4 p-2">
+          <div className="flex w-1/3 flex-col items-center justify-center gap-4 p-2 pt-8 max-lg:w-full">
             <div className="space-y-2">
               <h1 className="text-center text-2xl font-semibold leading-7 tracking-tight text-yellow-500">Mercado Atual:</h1>
               <Image src={"/images/galgosRacing.jpg"} alt="greyhound racing" width={300} height={300} />
@@ -272,13 +272,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="max-lg:w-full flex w-2/3 flex-col items-center justify-center gap-8 p-4 text-justify text-2xl font-semibold leading-7 tracking-tight text-zinc-400 max-lg:gap-4 max-lg:p-4 max-lg:text-sm">
+          <div className="flex w-2/3 flex-col items-center justify-center gap-8 p-4 pt-8 text-justify text-2xl font-semibold leading-7 tracking-tight text-zinc-400 max-lg:w-full max-lg:gap-4 max-lg:p-4 max-lg:text-sm">
             <p className="rounded-md bg-zinc-800 p-4">
               <Balance>
                 Estamos desenvolvendo uma plataforma dedicada a explorar diversos mercados esportivos, oferecendo aos usuários estatísticas
-                de alta qualidade e análises aprofundadas. Neste do lançamento, estamos focados no mercado de corrida de galgos do Reino
-                Unido e da Irlanda. Em breve, expandiremos nossos serviços para fornecer estatísticas de outros mercados de corrida de
-                galgos, incluindo os países da América do Norte, Austrália e Nova Zelândia.
+                de alta qualidade e análises aprofundadas. Neste do lançamento, estamos focados no mercado de{" "}
+                <strong className="text-zinc-200">corrida de galgos do Reino Unido e da Irlanda</strong>. Em breve, expandiremos nossos
+                serviços para fornecer estatísticas de outros mercados de corrida de galgos, incluindo os países da América do Norte,
+                Austrália e Nova Zelândia.
               </Balance>
             </p>
             <p className="rounded-md bg-zinc-800 p-4">
@@ -295,21 +296,83 @@ export default function Home() {
               </Balance>
             </p>
 
-            <p className="rounded-md bg-zinc-800 p-4">
+            <p className="lg:text-3xl">
               <Balance>Junte-se a nós em nossa jornada, pois não há limites para o que podemos alcançar.</Balance>
             </p>
           </div>
         </section>
 
-        <section id="tools" className="flex min-h-screen items-center justify-center bg-gray-400 pt-20">
-          Ferramentas
+        <section id="tools" className="flex min-h-screen flex-col items-center justify-start space-y-8 bg-zinc-950 pt-20">
+          <h1 className="max-lg:text-sm max-lg:px-2 pt-8 text-center text-2xl font-semibold leading-7 tracking-tight text-yellow-500">
+            <Balance>DESCUBRA AS FUNCIONALIDADES PODEROSAS DA NOSSA PLATAFORMA NESTE TUTORIAL FASCINANTE</Balance>
+          </h1>
+
+          <div className="row-auto grid w-full flex-1 grid-cols-3 gap-12 p-8 max-lg:grid-cols-1">
+            <div className="overflow-hidden rounded-md bg-zinc-700 p-4 shadow-lg">
+              <iframe
+                className="h-full w-full"
+                src="https://www.youtube.com/embed/2RQLxDzxbUI?list=PLnUudKjR9YWBFVKTexD0fTC-rBXW5BueX"
+                title="Video 1644233146"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen={true}
+              />
+            </div>
+            <div className="overflow-hidden rounded-md bg-zinc-700 p-4 shadow-lg">
+              <iframe
+                className="h-full w-full"
+                src="https://www.youtube.com/embed/2RQLxDzxbUI?list=PLnUudKjR9YWBFVKTexD0fTC-rBXW5BueX"
+                title="Video 1644233146"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen={true}
+              />
+            </div>
+            <div className="overflow-hidden rounded-md bg-zinc-700 p-4 shadow-lg">
+              <iframe
+                className="h-full w-full"
+                src="https://www.youtube.com/embed/2RQLxDzxbUI?list=PLnUudKjR9YWBFVKTexD0fTC-rBXW5BueX"
+                title="Video 1644233146"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen={true}
+              />
+            </div>
+            <div className="overflow-hidden rounded-md bg-zinc-700 p-4 shadow-lg">
+              <iframe
+                className="h-full w-full"
+                src="https://www.youtube.com/embed/2RQLxDzxbUI?list=PLnUudKjR9YWBFVKTexD0fTC-rBXW5BueX"
+                title="Video 1644233146"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen={true}
+              />
+            </div>
+            <div className="overflow-hidden rounded-md bg-zinc-700 p-4 shadow-lg">
+              <iframe
+                className="h-full w-full"
+                src="https://www.youtube.com/embed/2RQLxDzxbUI?list=PLnUudKjR9YWBFVKTexD0fTC-rBXW5BueX"
+                title="Video 1644233146"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen={true}
+              />
+            </div>
+            <div className="overflow-hidden rounded-md bg-zinc-700 p-4 shadow-lg">
+              <iframe
+                className="h-full w-full"
+                src="https://www.youtube.com/embed/2RQLxDzxbUI?list=PLnUudKjR9YWBFVKTexD0fTC-rBXW5BueX"
+                title="Video 1644233146"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen={true}
+              />
+            </div>
+          </div>
         </section>
 
         <footer
           id="contact"
           className="min-h-auto flex flex-col items-center justify-end gap-4 bg-zinc-900 pb-10 pt-20 text-zinc-300 max-lg:px-4 max-lg:pb-5 max-lg:pt-2"
         >
-          <div className="flex w-full items-center justify-around max-lg:grid max-lg:grid-cols-2 max-lg:grid-rows-2 max-lg:justify-items-center max-lg:space-x-4">
+          <div
+            className="flex w-full items-center justify-around 
+            max-lg:grid max-lg:grid-cols-2 max-lg:grid-rows-2 max-lg:justify-items-center max-lg:space-x-4"
+          >
             <div className="flex flex-col gap-4 rounded-md bg-zinc-800 p-2 max-lg:order-2 max-lg:pl-6">
               <MiniLogo />
               <div className="space-y-2">
@@ -319,10 +382,10 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-4 grid-rows-1 gap-6 text-yellow-500 max-lg:order-1 max-lg:col-span-2">
-              <IoLogoYoutube className="rounded-md bg-zinc-800 p-2 text-5xl"/>
-              <IoLogoInstagram className="rounded-md bg-zinc-800 p-2 text-5xl"/>
-              <IoLogoWhatsapp className="rounded-md bg-zinc-800 p-2 text-5xl"/>
-              <BsTelegram className="rounded-md bg-zinc-800 p-2 text-5xl"/>
+              <IoLogoYoutube className="rounded-md bg-zinc-800 p-2 text-5xl" />
+              <IoLogoInstagram className="rounded-md bg-zinc-800 p-2 text-5xl" />
+              <IoLogoWhatsapp className="rounded-md bg-zinc-800 p-2 text-5xl" />
+              <BsTelegram className="rounded-md bg-zinc-800 p-2 text-5xl" />
             </div>
 
             <ul className="text-md flex flex-col items-start justify-center gap-2 rounded-md bg-zinc-800 p-2 text-zinc-400 max-lg:order-3">
