@@ -80,7 +80,7 @@ export default function Register() {
         </h1>
         <Link href={"/login"} className="text-cyan-500 duration-300 ease-in-out hover:text-cyan-800">
           <Return className="mr-2 inline" />
-          Voltar para Login
+            Login
         </Link>
       </div>
 

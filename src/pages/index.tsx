@@ -1,5 +1,9 @@
+import { IoLogoInstagram, IoLogoWhatsapp, IoLogoYoutube } from "react-icons/io";
+import { BsTelegram } from "react-icons/bs";
+
 import { motion } from "framer-motion";
 import { MdLogin } from "react-icons/md";
+
 import Balance from "react-wrap-balancer";
 
 import { Link as LinkScrool } from "react-scroll";
@@ -69,7 +73,7 @@ export default function Home() {
           </li>
 
           <li className="relative">
-            <a className="cursor-default opacity-30 hover:text-white">Planos</a>
+            <a className="cursor-default opacity-30 ">Planos</a>
 
             <div className="free-div absolute bottom-4 left-8 p-1 text-xs  font-bold text-green-500">
               <span className="animate-pulse">FREE</span>
@@ -104,14 +108,14 @@ export default function Home() {
           {user ? (
             <Button
               className="flex items-center gap-1 hover:text-white"
-              Icon={<TbUser className="text-yellow-500" />}
+              Icon={<Image src={user?.imageUrl || ""} alt="Google login" width={16} height={16} className="rounded-3xl" />}
               href={"/dashboard"}
               value={`${user.name}`}
             />
           ) : (
             <Button
               className="flex items-center gap-1 hover:text-white"
-              Icon={<TbUser className="text-yellow-500" />}
+              Icon={<TbUser className="text-lg text-yellow-500" />}
               href={!user ? "/login" : "/dashboard"}
               value={"Entrar"}
             />
@@ -197,7 +201,7 @@ export default function Home() {
               <Balance>
                 Potencialize suas{" "}
                 <span className="relative">
-                  apostas <Underline className="bottom-[-8%] absolute left-[0%] w-full" />
+                  apostas <Underline className="absolute bottom-[-8%] left-[0%] w-full" />
                 </span>
                 e alcance resultados extraordinários
               </Balance>
@@ -216,7 +220,7 @@ export default function Home() {
                 JUNTE-SE AO NOSSO TIME DE{" "}
                 <span className="relative">
                   VENCEDORES!!!
-                  <UnderlineTipo2 className="bottom-[-15%] absolute left-[0%]  w-full" />
+                  <UnderlineTipo2 className="absolute bottom-[-15%] left-[0%]  w-full" />
                 </span>
               </Balance>
             </p>
@@ -233,13 +237,13 @@ export default function Home() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.8 }}
-              className="my-20 max-lg:mb-28 max-lg:my-10 mt-4 max-w-[720px] text-center text-xl font-extrabold leading-tight tracking-tight text-zinc-300 max-lg:text-lg"
+              className="my-20 mt-4 max-w-[720px] text-center text-xl font-extrabold leading-tight tracking-tight text-zinc-300 max-lg:my-10 max-lg:mb-28 max-lg:text-lg"
             >
               <Balance>
                 Acesso <span className="animate-pulse font-bold text-green-500">TOTAL</span> à Plataforma:{" "}
                 <span className="animate-pulse font-bold text-green-500">GRATUITO!!!</span>
               </Balance>
-                <div className="mt-2 max-lg:mt-0" >Oferta de Lançamento</div>
+              <div className="mt-2 max-lg:mt-0">Oferta de Lançamento</div>
             </motion.h2>
           </div>
         </section>
@@ -250,22 +254,109 @@ export default function Home() {
           amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis
         </section> */}
 
-        <section id="about" className="flex min-h-screen items-center justify-center bg-blue-400 pt-20">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam
-          accusamus. Mollitia omnis illo eligendi veniam itaque facilis neque tempore natus molestiae. Voluptatibus. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis
-          illo eligendi veniam itaque facilis neque tempore natus molestiae. Voluptatibus. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis illo eligendi
-          veniam itaque facilis neque tempore natus molestiae. Voluptatibus. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Expedita, hic ipsum? Voluptatum unde provident officia quam magnam accusamus. Mollitia omnis illo eligendi veniam itaque facilis
+        <section
+          id="about"
+          className="min-h-auto flex flex-wrap items-start justify-center bg-zinc-900 pb-20 pt-20 max-lg:flex-col max-lg:items-center"
+        >
+          <div className="max-lg:w-full flex w-1/3 flex-col items-center justify-center gap-4 p-2">
+            <div className="space-y-2">
+              <h1 className="text-center text-2xl font-semibold leading-7 tracking-tight text-yellow-500">Mercado Atual:</h1>
+              <Image src={"/images/galgosRacing.jpg"} alt="greyhound racing" width={300} height={300} />
+            </div>
+            <div className="space-y-2">
+              <h1 className="text-center text-2xl font-semibold leading-7 tracking-tight text-cyan-500">Em breve:</h1>
+              <div className="flex space-x-2">
+                <Image src={"/images/galgosRacing.jpg"} alt="greyhound racing" width={150} height={150} />
+                <Image src={"/images/galgosRacing.jpg"} alt="greyhound racing" width={150} height={150} />
+              </div>
+            </div>
+          </div>
+
+          <div className="max-lg:w-full flex w-2/3 flex-col items-center justify-center gap-8 p-4 text-justify text-2xl font-semibold leading-7 tracking-tight text-zinc-400 max-lg:gap-4 max-lg:p-4 max-lg:text-sm">
+            <p className="rounded-md bg-zinc-800 p-4">
+              <Balance>
+                Estamos desenvolvendo uma plataforma dedicada a explorar diversos mercados esportivos, oferecendo aos usuários estatísticas
+                de alta qualidade e análises aprofundadas. Neste do lançamento, estamos focados no mercado de corrida de galgos do Reino
+                Unido e da Irlanda. Em breve, expandiremos nossos serviços para fornecer estatísticas de outros mercados de corrida de
+                galgos, incluindo os países da América do Norte, Austrália e Nova Zelândia.
+              </Balance>
+            </p>
+            <p className="rounded-md bg-zinc-800 p-4">
+              <Balance>
+                Além disso, estamos planejando ampliar nossas atividades para incluir os mercados de FIFA e futebol, em um futuro próximo.
+                Posteriormente, lançaremos bots de sinais no Telegram para fornecer orientações em determinados mercados.
+              </Balance>
+            </p>
+            <p className="rounded-md bg-zinc-800 p-4">
+              <Balance>
+                Além de fornecer estatísticas confiáveis, nossa plataforma apresentará análises exclusivas realizadas por nossa equipe
+                especializada. Estamos experimentando um crescimento exponencial e estamos comprometidos em expandir continuamente nossos
+                serviços.
+              </Balance>
+            </p>
+
+            <p className="rounded-md bg-zinc-800 p-4">
+              <Balance>Junte-se a nós em nossa jornada, pois não há limites para o que podemos alcançar.</Balance>
+            </p>
+          </div>
         </section>
 
         <section id="tools" className="flex min-h-screen items-center justify-center bg-gray-400 pt-20">
           Ferramentas
         </section>
 
-        <footer id="contact" className="flex min-h-screen items-center justify-center bg-cyan-400 pt-20">
-          Contato
+        <footer
+          id="contact"
+          className="min-h-auto flex flex-col items-center justify-end gap-4 bg-zinc-900 pb-10 pt-20 text-zinc-300 max-lg:px-4 max-lg:pb-5 max-lg:pt-2"
+        >
+          <div className="flex w-full items-center justify-around max-lg:grid max-lg:grid-cols-2 max-lg:grid-rows-2 max-lg:justify-items-center max-lg:space-x-4">
+            <div className="flex flex-col gap-4 rounded-md bg-zinc-800 p-2 max-lg:order-2 max-lg:pl-6">
+              <MiniLogo />
+              <div className="space-y-2">
+                <p className="text-start">XBTips 2023</p>
+                <p className="text-start">Todos os direitos reservados</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-4 grid-rows-1 gap-6 text-yellow-500 max-lg:order-1 max-lg:col-span-2">
+              <IoLogoYoutube className="rounded-md bg-zinc-800 p-2 text-5xl"/>
+              <IoLogoInstagram className="rounded-md bg-zinc-800 p-2 text-5xl"/>
+              <IoLogoWhatsapp className="rounded-md bg-zinc-800 p-2 text-5xl"/>
+              <BsTelegram className="rounded-md bg-zinc-800 p-2 text-5xl"/>
+            </div>
+
+            <ul className="text-md flex flex-col items-start justify-center gap-2 rounded-md bg-zinc-800 p-2 text-zinc-400 max-lg:order-3">
+              <li>
+                <a className=" text-cyan-500 hover:text-white">Dúvidas</a>
+              </li>
+              <li>
+                <a className=" text-cyan-500 hover:text-white">Sugestões</a>
+              </li>
+              <li>
+                <a className=" text-cyan-500 hover:text-white">Sua Opinião</a>
+              </li>
+              <li>
+                <a className="hover:text-white">Direitos Autorais</a>
+              </li>
+              <li>
+                <a className="hover:text-white">Termos de uso</a>
+              </li>
+              <li>
+                <a className="hover:text-white">Políticas de privacidade</a>
+              </li>
+              <li>
+                {user ? null : <Button className="flex items-center gap-1 hover:text-white" href={"/login"} value={"Acesar Agora"} />}
+              </li>
+            </ul>
+          </div>
+
+          <p className="mt-10 px-10 text-center text-sm hover:text-zinc-100 max-lg:mt-4 max-lg:px-2 max-lg:text-justify">
+            <Balance>
+              Ao interagir com o site e os serviços da XBTips, você concorda com nossos Termos de Uso e Políticas de Privacidade. Além
+              disso, concorda também quando utilizamos cookies para aprimorar nossos serviços, garantindo que nenhum dado pessoal seja
+              fornecido a terceiros.
+            </Balance>
+          </p>
         </footer>
       </main>
 

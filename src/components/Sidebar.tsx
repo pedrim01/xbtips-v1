@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 import { FaUserCog } from "react-icons/fa";
 import { HiLockClosed } from "react-icons/hi";
 import { GoSignOut } from "react-icons/go";
@@ -20,17 +20,15 @@ import AvatarUser from "./AvatarUser";
 import useAuthFirebase from "@/hook/useAuthFirebase";
 
 interface SidebarProps {
-  refSidebar:RefObject<HTMLDivElement>
-
+  refSidebar: RefObject<HTMLDivElement>;
 }
 
-
-export function Sidebar({refSidebar} : SidebarProps) {
+export function Sidebar({ refSidebar }: SidebarProps) {
   const [isOpenSidebar, setIsOpenSidebar] = useState(true);
-  const {isVisibleSidebar} = useSidebar()
-  const {user}  = useAuthFirebase()
+  const { isVisibleSidebar } = useSidebar();
+  const { user } = useAuthFirebase();
 
-  const {signOut} = useAuthFirebase()
+  const { signOut } = useAuthFirebase();
 
   function isWidthSidebar() {
     return setIsOpenSidebar(!isOpenSidebar);
@@ -44,7 +42,15 @@ export function Sidebar({refSidebar} : SidebarProps) {
       } duration-500 ease-in-out`}
     >
       <Link href={"/dashboard"}>
-        {isOpenSidebar ? <div className="ml-8 mt-2"><Logo height={8} width={13} /></div> : <div className="ml-2 mt-2"><MiniLogo /></div>}
+        {isOpenSidebar ? (
+          <div className="ml-8 mt-2">
+            <Logo height={8} width={13} />
+          </div>
+        ) : (
+          <div className="ml-2 mt-2">
+            <MiniLogo />
+          </div>
+        )}
       </Link>
 
       <hr className="mt-12 h-px border-0 bg-zinc-500" />
@@ -129,14 +135,19 @@ export function Sidebar({refSidebar} : SidebarProps) {
           <div className="flex items-center">
             {isOpenSidebar ? (
               <>
-                <AvatarUser className="text-zinc-400 duration-500 ease-in-out"/>
+                <Image 
+                  src={user?.imageUrl || ''} 
+                  alt="Google login" 
+                  width={16} 
+                  height={16}
+                  className='rounded-3xl' 
+                />
                 <span className="lg:text-md ml-2 text-sm  leading-3 text-white duration-500 ease-in-out hover:text-cyan-300 hover:underline lg:font-medium lg:tracking-wider">
                   {user?.name}
                 </span>
               </>
             ) : (
-              
-              <AvatarUser className="text-zinc-400 duration-500 ease-in-out" />
+              <AvatarUser className="text-zinc-400 duration-500 ease-in-out rounded-3xl" />
             )}
           </div>
         </div>
