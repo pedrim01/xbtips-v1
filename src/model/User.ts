@@ -1,4 +1,3 @@
-import { DetailedHTMLProps, ImgHTMLAttributes } from "react";
 
 
 export default interface User {
@@ -7,5 +6,5 @@ export default interface User {
   name: string | null;
   token: string;
   provider: string;
-  imageUrl?: string ;
+  imageUrl: string | null;
 }
